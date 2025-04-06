@@ -22,7 +22,7 @@ export default function AboutMe() {
           </p>
           <div className="flex gap-4">
             <Button variant="outline" asChild>
-              <a href="#contact">Contact Me</a>
+              <a href="https://bait.bernardoserrano.com" target="_blank" rel="noopener noreferrer">Contact Me</a>
             </Button>
           </div>
         </div>

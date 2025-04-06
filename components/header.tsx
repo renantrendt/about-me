@@ -23,7 +23,7 @@ export default function Header() {
     { href: "#skills", label: "Skills" },
     { href: "#projects", label: "Projects" },
     { href: "#timeline", label: "Journey" },
-    { href: "#contact", label: "Contact" },
+    { href: "https://bait.bernardoserrano.com", label: "Contact" },
   ]
 
   return (
