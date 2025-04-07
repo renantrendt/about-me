@@ -76,6 +76,13 @@ export default function ProjectList() {
       tags: ["React", "Game", "Interactive", "Simulation"],
     },
     {
+      title: "Strong Password",
+      description:
+        "A Website based on a school project, where it generates actual meaningful passwords that you can remember (I think is better than Google's).",
+      url: "https://strong-password.bernardoserrano.com/",
+      tags: ["JavaScript", "Game", "Idle Game", "Interactive"],
+    },
+    {
       title: "Doge Clicker",
       description:
         "An incremental clicker game based on the Doge meme. Click to earn virtual currency, buy miners and upgrades to automate and increase production.",
