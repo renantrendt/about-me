@@ -38,6 +38,12 @@ export default function ProjectList() {
 
   const projects = [
     {
+      title: "Python Help",
+      description: "A python analyzer to check your python code and see if it is up-to-date.",
+      url: "https://python-help.bernardoserrano.com/",
+      tags: ["Python", "AI", "Programming"],
+    },
+    {
       title: "Randomizer Activities",
       description: "An app to randomize weekend activities. Features user authentication and activity management.",
       url: "https://activities-randomizer.bernardoserrano.com",
