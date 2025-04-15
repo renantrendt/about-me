@@ -4,13 +4,14 @@ import { useState, useRef, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink, Lock } from "lucide-react"
 
 type Project = {
   title: string
   description: string
   url?: string
   tags: string[]
+  locked?: boolean
 }
 
 export default function ProjectList() {
@@ -42,6 +43,7 @@ export default function ProjectList() {
       description: "A python analyzer to check your python code and see if it is up-to-date.",
       url: "https://python-help.bernardoserrano.com/",
       tags: ["Python", "AI", "Programming"],
+      locked: true,
     },
     {
       title: "Randomizer Activities",
@@ -144,7 +146,10 @@ export default function ProjectList() {
             className={`project-card border transition-all duration-700 delay-${Math.min(index, 5) * 100} ${isVisible ? "opacity-100" : "opacity-0 translate-y-8"}`}
           >
             <CardHeader>
-              <CardTitle>{project.title}</CardTitle>
+              <div className="flex justify-between items-center">
+                <CardTitle>{project.title}</CardTitle>
+                {project.locked && <Lock className="h-5 w-5 text-gray-400" />}
+              </div>
               <CardDescription>{project.description}</CardDescription>
             </CardHeader>
             <CardContent>
@@ -158,15 +163,26 @@ export default function ProjectList() {
             </CardContent>
             {project.url && (
               <CardFooter>
-                <Button variant="outline" size="sm" className="w-full group" asChild>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full group" 
+                  asChild
+                  disabled={project.locked}
+                >
                   <a
-                    href={project.url}
+                    href={project.locked ? "#" : project.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center"
+                    onClick={(e) => project.locked && e.preventDefault()}
                   >
-                    View Project
-                    <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    {project.locked ? "Locked" : "View Project"}
+                    {project.locked ? (
+                      <Lock className="ml-2 h-4 w-4" />
+                    ) : (
+                      <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    )}
                   </a>
                 </Button>
               </CardFooter>
