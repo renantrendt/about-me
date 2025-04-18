@@ -62,6 +62,7 @@ export default function ProjectList() {
       description: "A personal project to track and rank rare car sightings in California.",
       url: "https://car-ranking.bernardoserrano.com",
       tags: ["React", "Data Visualization"],
+      locked: true,
     },
     {
       title: "Algebra Game",
@@ -84,6 +85,13 @@ export default function ProjectList() {
       tags: ["React", "Game", "Interactive", "Simulation"],
     },
     {
+      title: "Snake Game",
+      description:
+        "A classic Snake game with modern features and gameplay enhancements.",
+      url: "https://snake-gms.bernardoserrano.com/",
+      tags: ["JavaScript", "Game", "Interactive"],
+    },
+    {
       title: "Strong Password",
       description:
         "A Website based on a school project, where it generates actual meaningful passwords that you can remember (I think is better than Google's).",
@@ -100,6 +108,7 @@ export default function ProjectList() {
     {
       title: "Pygame",
       description: "Two Python games: an enhanced Snake game and a duck-themed survival game.",
+      url: "https://pygame.bernardoserrano.com",
       tags: ["Python", "Pygame", "Game Development"],
     },
     {
@@ -147,10 +156,10 @@ export default function ProjectList() {
           >
             <CardHeader>
               <div className="flex justify-between items-center">
-                <CardTitle>{project.title}</CardTitle>
+                <CardTitle className={project.title === "Car Ranking" || project.title === "Python Help" ? "blur-[8px] select-none" : ""}>{project.title}</CardTitle>
                 {project.locked && <Lock className="h-5 w-5 text-gray-400" />}
               </div>
-              <CardDescription>{project.description}</CardDescription>
+              <CardDescription className={project.title === "Car Ranking" || project.title === "Python Help" ? "blur-[8px] select-none" : ""}>{project.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2 mb-4">
