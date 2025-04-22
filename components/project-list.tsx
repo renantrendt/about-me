@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Lock } from "lucide-react"
+import { ExternalLink, Lock, HardHat, Construction } from "lucide-react"
 
 type Project = {
   title: string
@@ -12,6 +12,7 @@ type Project = {
   url?: string
   tags: string[]
   locked?: boolean
+  underConstruction?: boolean
 }
 
 export default function ProjectList() {
@@ -43,13 +44,14 @@ export default function ProjectList() {
       description: "A python analyzer to check your python code and see if it is up-to-date.",
       url: "https://python-help.bernardoserrano.com/",
       tags: ["Python", "AI", "Programming"],
-      locked: true,
+      underConstruction: true,
     },
     {
       title: "Randomizer Activities",
       description: "An app to randomize weekend activities. Features user authentication and activity management.",
       url: "https://activities-randomizer.bernardoserrano.com",
       tags: ["Next.js", "Auth", "Supabase"],
+      underConstruction: true,
     },
     {
       title: "Met Gallery",
@@ -110,6 +112,7 @@ export default function ProjectList() {
       description: "Two Python games: an enhanced Snake game and a duck-themed survival game.",
       url: "https://pygame.bernardoserrano.com",
       tags: ["Python", "Pygame", "Game Development"],
+      underConstruction: true,
     },
     {
       title: "To-Do List",
@@ -156,10 +159,43 @@ export default function ProjectList() {
           >
             <CardHeader>
               <div className="flex justify-between items-center">
-                <CardTitle className={project.title === "Car Ranking" || project.title === "Python Help" ? "blur-[8px] select-none" : ""}>{project.title}</CardTitle>
+                <CardTitle 
+                  className={`
+                    ${project.title === "Car Ranking" ? "blur-[8px] select-none" : ""}
+                    ${project.underConstruction ? "font-bold relative" : ""}
+                  `}
+                >
+                  {project.title}
+                  {project.underConstruction && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-800 to-amber-700 border-4 border-amber-900 rounded-sm flex items-center justify-center transform rotate-[-2deg] shadow-lg">
+                      <div className="absolute -top-1 -left-1 w-3 h-3 bg-zinc-800 rounded-full"></div>
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-zinc-800 rounded-full"></div>
+                      <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-zinc-800 rounded-full"></div>
+                      <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-zinc-800 rounded-full"></div>
+                      <div className="absolute inset-0 border-t-2 border-b-2 border-amber-600/30 mx-2 my-3"></div>
+                      <span className="text-amber-100 font-bold text-shadow z-10">UNDER CONSTRUCTION</span>
+                    </div>
+                  )}
+                </CardTitle>
                 {project.locked && <Lock className="h-5 w-5 text-gray-400" />}
+                {project.underConstruction && <HardHat className="h-5 w-5 text-amber-500" />}
               </div>
-              <CardDescription className={project.title === "Car Ranking" || project.title === "Python Help" ? "blur-[8px] select-none" : ""}>{project.description}</CardDescription>
+              <CardDescription 
+                className={`
+                  ${project.title === "Car Ranking" ? "blur-[8px] select-none" : ""}
+                  ${project.underConstruction ? "relative mt-2" : ""}
+                `}
+              >
+                {project.description}
+                {project.underConstruction && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-800 to-amber-700 border-2 border-amber-900 rounded-sm px-2 py-1 flex items-center justify-center transform rotate-[1deg] shadow-lg">
+                    <div className="absolute -top-1 left-2 w-2 h-2 bg-zinc-800 rounded-full"></div>
+                    <div className="absolute -bottom-1 right-2 w-2 h-2 bg-zinc-800 rounded-full"></div>
+                    <div className="absolute inset-0 border-t border-b border-amber-600/30 mx-3 my-2"></div>
+                    <span className="text-amber-100 text-xs font-semibold z-10">Coming Soon!</span>
+                  </div>
+                )}
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2 mb-4">
@@ -175,20 +211,22 @@ export default function ProjectList() {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="w-full group" 
+                  className={`w-full group ${project.underConstruction ? "bg-gradient-to-r from-amber-800 to-amber-700 border-3 border-amber-900 hover:bg-amber-800 hover:border-amber-900" : ""}`} 
                   asChild
-                  disabled={project.locked}
+                  disabled={project.locked || project.underConstruction}
                 >
                   <a
-                    href={project.locked ? "#" : project.url}
+                    href={project.locked || project.underConstruction ? "#" : project.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center"
-                    onClick={(e) => project.locked && e.preventDefault()}
+                    onClick={(e) => (project.locked || project.underConstruction) && e.preventDefault()}
                   >
-                    {project.locked ? "Locked" : "View Project"}
+                    {project.locked ? "Locked" : project.underConstruction ? "Construction in Progress" : "View Project"}
                     {project.locked ? (
                       <Lock className="ml-2 h-4 w-4" />
+                    ) : project.underConstruction ? (
+                      <Construction className="ml-2 h-4 w-4 text-amber-300" />
                     ) : (
                       <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     )}
