@@ -40,6 +40,12 @@ export default function ProjectList() {
 
   const projects = [
     {
+      title: "Information",
+      description: "Some information docs i made.",
+      url: "https://information.bernardoserrano.com/",
+      tags: ["Documentation", "Personal", "Resources"],
+    },
+    {
       title: "Python Help",
       description: "A python analyzer to check your python code and see if it is up-to-date.",
       url: "https://python-help.bernardoserrano.com/",
