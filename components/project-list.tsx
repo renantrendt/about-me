@@ -13,6 +13,9 @@ type Project = {
   tags: string[]
   locked?: boolean
   underConstruction?: boolean
+  constructionLabel?: string
+  comingSoonText?: string
+  projectIdentifier?: string
 }
 
 export default function ProjectList() {
@@ -40,8 +43,14 @@ export default function ProjectList() {
 
   const projects = [
     {
-      title: "Information",
-      description: "Some information docs i made.",
+      title: "Chat",
+      description: "A website for you to talk with your friends at school",
+      url: "https://chat.bernardoserrano.com",
+      tags: ["Communication", "Social", "School"],
+    },
+    {
+      title: "Docs",
+      description: "Some documents i made",
       url: "https://information.bernardoserrano.com/",
       tags: ["Documentation", "Personal", "Resources"],
     },
@@ -51,6 +60,9 @@ export default function ProjectList() {
       url: "https://python-help.bernardoserrano.com/",
       tags: ["Python", "AI", "Programming"],
       underConstruction: true,
+      constructionLabel: "UNDER DELAYED² CONSTRUCTION",
+      comingSoonText: "Coming Late",
+      projectIdentifier: "PH",
     },
     {
       title: "Randomizer Activities",
@@ -58,6 +70,9 @@ export default function ProjectList() {
       url: "https://activities-randomizer.bernardoserrano.com",
       tags: ["Next.js", "Auth", "Supabase"],
       underConstruction: true,
+      constructionLabel: "UNDER INFINITE CONSTRUCTION",
+      comingSoonText: "Coming Never LOL",
+      projectIdentifier: "RA",
     },
     {
       title: "Met Gallery",
@@ -119,6 +134,9 @@ export default function ProjectList() {
       url: "https://pygame.bernardoserrano.com",
       tags: ["Python", "Pygame", "Game Development"],
       underConstruction: true,
+      constructionLabel: "UNDER CONSTRUCTION",
+      comingSoonText: "Coming Really Late",
+      projectIdentifier: "PG",
     },
     {
       title: "To-Do List",
@@ -179,7 +197,10 @@ export default function ProjectList() {
                       <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-zinc-800 rounded-full"></div>
                       <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-zinc-800 rounded-full"></div>
                       <div className="absolute inset-0 border-t-2 border-b-2 border-amber-600/30 mx-2 my-3"></div>
-                      <span className="text-amber-100 font-bold text-shadow z-10">UNDER CONSTRUCTION</span>
+                      <span className="text-amber-100 font-bold text-shadow z-10">{project.constructionLabel || "UNDER CONSTRUCTION"}</span>
+                      {project.projectIdentifier && (
+                        <span className="absolute bottom-0 right-1 text-amber-100 text-[10px] font-bold">{project.projectIdentifier}</span>
+                      )}
                     </div>
                   )}
                 </CardTitle>
@@ -198,7 +219,10 @@ export default function ProjectList() {
                     <div className="absolute -top-1 left-2 w-2 h-2 bg-zinc-800 rounded-full"></div>
                     <div className="absolute -bottom-1 right-2 w-2 h-2 bg-zinc-800 rounded-full"></div>
                     <div className="absolute inset-0 border-t border-b border-amber-600/30 mx-3 my-2"></div>
-                    <span className="text-amber-100 text-xs font-semibold z-10">Coming Soon!</span>
+                    <span className="text-amber-100 text-xs font-semibold z-10">{project.comingSoonText || "Coming Soon!"}</span>
+                    {project.projectIdentifier && (
+                      <span className="absolute bottom-0 right-1 text-amber-100 text-[10px] font-bold">{project.projectIdentifier}</span>
+                    )}
                   </div>
                 )}
               </CardDescription>
